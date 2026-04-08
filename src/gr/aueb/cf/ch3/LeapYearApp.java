@@ -20,7 +20,7 @@ public class LeapYearApp {
 
         // Processing
         isLeap = (inputYear % 400) == 0 ||
-                (inputYear % 4 == 0 && inputYear % 100 == 0) ; // A year is a leap year if it's fully dividable by 400
+                (inputYear % 4 == 0 && inputYear % 100 != 0);
         if(!isLeap) {
             System.out.println(inputYear + " is not a leap year");
         } else {
