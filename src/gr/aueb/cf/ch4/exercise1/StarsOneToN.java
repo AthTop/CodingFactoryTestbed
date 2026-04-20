@@ -1,12 +1,12 @@
-package gr.aueb.cf.ch4;
+package gr.aueb.cf.ch4.exercise1;
 
 import java.util.Scanner;
 
 /**
  * Prints user inputted n stars,
- * starting from n down to 1
+ * starting from 1 up to n
  */
-public class StarsNtoOne {
+public class StarsOneToN {
 
     public static void main(String[] args) {
         // Initialization
@@ -18,8 +18,8 @@ public class StarsNtoOne {
         n = scanner.nextInt();
 
         // Print stars
-        for(int i = n; i > 0; i--) {
-            for(int j = 0; j < i; j++){
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j <= i; j++){
                 System.out.print('*');
             }
             System.out.println();

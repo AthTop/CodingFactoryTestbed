@@ -1,11 +1,11 @@
-package gr.aueb.cf.ch4;
+package gr.aueb.cf.ch4.exercise1;
 
 import java.util.Scanner;
 
 /**
- * Prints n, user inputted, stars vertically
+ * Prints n, user inputted, stars horizontally
  */
-public class StarsVertical {
+public class StarsHorizontal {
 
     public static void main(String[] args) {
         // Initialization
@@ -18,7 +18,7 @@ public class StarsVertical {
 
         // Print stars
         for(int i = 0; i < n; i++) {
-            System.out.println('*');
+            System.out.print('*');
         }
     }
 }
