@@ -130,10 +130,8 @@ public class TheaterApp {
 
     /**
      * helps convert the A-L columns to ints for the array index
-     * Utilizes A = 65, L = 76, making 77 - char ordinal % 12 to always
-     * give us a number within the array bounds
      * @param col char (A-L)
-     * @return array index for the column
+     * @return 0 for A, 1 for B... 11 for L
      */
     public static int charColToInt(char col) {
         return col - 'A';
