@@ -10,21 +10,49 @@ public class TicTacToe {
     public static final int ROWS = 3;
     public static final int COLUMNS = 3;
     public static int[][] gameBoard = new int[ROWS][COLUMNS];
+    public static int occupiedPositions = 0;
 
     /**
-     * Main game loop, control flow and user I/O
+     * Main game loop, control flow, and user I/O
      * @param args none used
      */
     public static void main(String[] args) {
+
         printGrid();
     }
 
+    /**
+     * Attempts to place a player mark on the gameboard
+     * Expects row and length in 0-2 range, or 0-gameboard.length - 1
+     * @param player int representing the player
+     * @param row int representing the row to place marker at(outer array)
+     * @param column int representing the column to place marker at (inner array)
+     * @return true if marker placed, false if spot is occupied
+     */
     public static boolean placeMove(int player, int row, int column) {
-        return false;
+        if (gameBoard[row][column] != 0) return false;
+        gameBoard[row][column] = player;
+        return true;
     }
 
+    /**
+     * Checks if a ny win condition applies
+     * @param player int player to check for
+     * @return true if any condition matches, otherwise false
+     */
     public static boolean isWin(int player) {
-        return false;
+        return isRowWin(player)
+                || isColumnWin(player)
+                || isAntiDiagonalWin(player)
+                || isMainDiagonalWin(player);
+    }
+
+    /**
+     * Checks if all positions in the gameboard are occupied
+     * @return true if all occupied, false otherwise
+     */
+    public static boolean isTie() {
+        return occupiedPositions == ROWS * COLUMNS;
     }
 
     /**
@@ -70,11 +98,20 @@ public class TicTacToe {
         for (int i = 0; i < gameBoard.length; i++) {
             if (gameBoard[i][i] == player) count++;
         }
-        return count == 3;
+        return count == gameBoard.length;
     }
 
+    /**
+     * checks the gameboard anti-diagonally for player marks
+     * @param player int representing the player to check for
+     * @return true if the player marks the anti-diagonal, otherwise false
+     */
     public static boolean isAntiDiagonalWin(int player) {
-        return false;
+        int count = 0;
+        for (int i = 0; i < gameBoard.length; i++) {
+            if (gameBoard[i][gameBoard.length - 1 - i] == player) count++;
+        }
+        return count == gameBoard.length;
     }
 
     /**
