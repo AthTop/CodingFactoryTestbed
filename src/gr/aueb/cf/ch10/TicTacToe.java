@@ -1,11 +1,12 @@
 package gr.aueb.cf.ch10;
 
-import java.util.Arrays;
+import java.util.Scanner;
 
 /**
  * An implementation of the famous Tic-Tac-Toe game
  * using the console as a visual interface
  */
+
 public class TicTacToe {
     public static final int ROWS = 3;
     public static final int COLUMNS = 3;
@@ -17,8 +18,57 @@ public class TicTacToe {
      * @param args none used
      */
     public static void main(String[] args) {
+        int activePlayer = 1;
+        int row = 0;
+        int col = 0;
+        String input = "";
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("Player " + activePlayer + " is playing");
+            // input logic
+            while (true) {
+                System.out.println("Please enter your row placement (1-3): ");
+                input = scanner.nextLine();
+                while (!isValidInput(input)) {
+                    System.out.println("Please provide a number between 1 and 3");
+                    input = scanner.nextLine();
+                }
+                row = Integer.parseInt(input);
 
-        printGrid();
+                System.out.println("Please enter your column placement (1-3): ");
+                input = scanner.nextLine();
+                while (!isValidInput(input)) {
+                    System.out.println("Please provide a number between 1 and 3");
+                    input = scanner.nextLine();
+                }
+                col = Integer.parseInt(input);
+
+                if (!placeMove(activePlayer, row - 1, col - 1)) {
+                    System.out.println("Position is unavailable, try again.");
+                    continue;
+                }
+                break;
+            }
+            printGrid();
+            if (isWin(activePlayer)) {
+                System.out.println("Player " + activePlayer + " wins!");
+                break;
+            }
+            if (isTie()) {
+                System.out.println("It's a tie, no more available positions!");
+                break;
+            }
+            activePlayer = 3 - activePlayer; // returns 2 if player = 1, 1 if player = 2
+        }
+    }
+
+    /**
+     * checks if the string is 1, 2,  or 3
+     * @param s input string
+     * @return true if the string is "1", "2" or "3"
+     */
+    public static boolean isValidInput(String s) {
+        return s.matches("[1-3]");
     }
 
     /**
@@ -32,6 +82,7 @@ public class TicTacToe {
     public static boolean placeMove(int player, int row, int column) {
         if (gameBoard[row][column] != 0) return false;
         gameBoard[row][column] = player;
+        occupiedPositions++;
         return true;
     }
 
@@ -79,13 +130,14 @@ public class TicTacToe {
      * @return true if the player marks all cells in a column, otherwise false
      */
     public static boolean isColumnWin(int player) {
-        int count = 0;
         for (int i = 0; i < gameBoard.length; i++) {
+            int count = 0;
             for (int j = 0; j < gameBoard.length; j++) {
                 if (gameBoard[j][i] == player) count++;
             }
+            if (count == gameBoard.length) return true;
         }
-        return count == 3;
+        return false;
     }
 
     /**
@@ -117,19 +169,16 @@ public class TicTacToe {
     /**
      * Prints the game board in a nice 3x3 grid
      * Player 1 is printed as O
-     * Player is printed as X
-     * Unmarked cells are marked with an empty space
+     * Player 2 is printed as X
+     * Unmarked cells are marked with a .
      */
     public static void printGrid() {
-        for (int[] line : gameBoard) {
-            String lineString = Arrays.toString(line);
-            String formatedLine = lineString
-                    .substring(1, lineString.length() - 1)
-                    .replace("1", "O")
-                    .replace("2", "X")
-                    .replace("0", " ")
-                    .replace(",", " |");
-            System.out.print("| " + formatedLine + " |");
+        for (int[] row : gameBoard) {
+            System.out.print("| ");
+            for (int cell : row) {
+                char symbol = cell == 1 ? 'O' : cell == 2 ? 'X' : '.';
+                System.out.print(symbol + " | ");
+            }
             System.out.println();
         }
     }
