@@ -14,7 +14,7 @@ public class MathHelper {
      * @return highest int in the array.
      */
     public static int findMax(int[] array) {
-        if (arr == null || array.length == 0) throw new IllegalArgumentException("Array can't be null");
+        if (array == null || array.length == 0) throw new IllegalArgumentException("Array can't be null");
         int max = Integer.MIN_VALUE;
         for (int num : array) {
             if (num > max) max = num;
@@ -28,7 +28,7 @@ public class MathHelper {
      * @return lowest int in the array.
      */
     public static int findMin(int[] array) {
-        if (arr == null || array.length == 0) throw new IllegalArgumentException("Array can't be null");
+        if (array == null || array.length == 0) throw new IllegalArgumentException("Array can't be null");
         int min = Integer.MAX_VALUE;
         for (int num : array) {
             if (num < min) min = num;
@@ -42,7 +42,7 @@ public class MathHelper {
      * @return average value of array.
      */
     public static double findAverage(int[] array) {
-        if (arr == null || array.length == 0) throw new IllegalArgumentException("Array can't be null");
+        if (array == null || array.length == 0) throw new IllegalArgumentException("Array can't be null");
         int sum = 0;
         for (int num : array) {
             sum += num;
